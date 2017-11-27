@@ -12,7 +12,7 @@ def get_line_sensor_data():
 
 def get_switch_input(swnum):
     with open('/dev/rtswitch'+str(swnum),'r') as f:
-        return not(int(f.readline()))
+        return int(not(int(f.readline())))
 
 class JsonResponsehandler(BaseHTTPRequestHandler):
     def __init__(self, *args):
