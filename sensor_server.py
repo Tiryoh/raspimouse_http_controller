@@ -24,7 +24,7 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
         for i in range(3):
             switch.append(get_switch_input(i))
         sensor_dict = {
-            "line sensor": {
+            "lightsensor": {
                 "0": left_end,
                 "1": left,
                 "2": right,
