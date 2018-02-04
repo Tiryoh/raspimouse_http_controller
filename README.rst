@@ -7,7 +7,7 @@ HTTP server scripts for `Tiryoh/raspimouse_jupyternotebook <https://github.com/T
 Usage
 =====
 
-You just need is to run ``sensor_server.py`` or ``controller_server.py``.
+You just need is to run ``sensor_server.py`` or ``controller_server.py`` on your `Raspberry Pi Mouse <http://products.rt-net.jp/micromouse/raspberry-pi-mouse>`_.
 
 e.g.)
 
@@ -18,11 +18,11 @@ e.g.)
 Installation
 ============
 
-``git clone`` this repository
+First, set up your Raspberry Pi Mouse. After that, ``git clone`` this repository.
 
 .. code-block:: none
 
-  git clone https://github.com/Tiryoh/raspimouse_http_controller.git
+  $ git clone https://github.com/Tiryoh/raspimouse_http_controller.git
 
 
 License
