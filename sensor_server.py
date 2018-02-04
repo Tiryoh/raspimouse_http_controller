@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+VERSION='0.1.1'
+
 import json
 import argparse
 # from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer #for python2
@@ -45,8 +47,9 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
         # self.wfile.write(body)
 
 def main():
-    parser = argparse.ArgumentParser(description="usage:set JSON responce server port as '--port 5000' or '-p 5000'")
-    parser.add_argument("-p", "--port", type=int, default=5000, help="define raspimouse controller's tcp port")
+    parser = argparse.ArgumentParser(description="usage:set JSON responce server port e.g.) '--port 5000' or '-p 5000'")
+    parser.add_argument("-p", "--port", type=int, default=5000, help="define raspimouse controller's TCP port")
+    parser.add_argument("--version", action="version", version="raspimouse_http_controller sensor_server v" + VERSION)
     args = parser.parse_args()
 
     server = HTTPServer(("", args.port), JsonResponsehandler)
