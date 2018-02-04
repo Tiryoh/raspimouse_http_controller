@@ -2,14 +2,28 @@
 raspimouse_http_controller
 ==============================
 
+HTTP server scripts for `Tiryoh/raspimouse_jupyternotebook <https://github.com/Tiryoh/raspimouse_jupyternotebook>`_
+
 Usage
 =====
+
+You just need is to run ``sensor_server.py`` or ``controller_server.py``.
+
+e.g.)
+
+.. code-block:: none
+
+  $ ./sensor_server.py
+
+Installation
+============
+
+``git clone`` this repository
 
 .. code-block:: none
 
   git clone https://github.com/Tiryoh/raspimouse_http_controller.git
-  cd raspimouse_http_controller
-  ./sensor_server.py
+
 
 License
 ========
