@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-VERSION='0.1.1'
+VERSION='0.1.2'
 
 import json
 import argparse
@@ -53,7 +53,7 @@ def main():
     args = parser.parse_args()
 
     server = HTTPServer(("", args.port), JsonResponsehandler)
-    print("server running on port " + str(args.port))
+    print("sensor_server v" + VERSION + " running on port " + str(args.port))
     server.serve_forever()
 
 
