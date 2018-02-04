@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+VERSION='0.1.0'
+
 import numbers
 import json
 import argparse
@@ -48,7 +50,7 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
         for i in range(3):
             switch.append(get_switch_input(i))
         sensor_dict = {
-            "line sensor": {
+            "lightsensor": {
                 "0": left_end,
                 "1": left,
                 "2": right,
@@ -65,12 +67,12 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/json")
         self.send_header("Content-length", len(body))
         self.end_headers()
-        self.wfile.write(body.encode('UTF-8'))
+        self.wfile.write(body.encode('utf-8'))
         # self.wfile.write(body)
 
     def do_POST(self):
         """
-        ## sample commands
+        sample commands:
         ```
         curl -v -H "Accept: application/json" -H "Content-type: application/json" -X POST -d {JSON data} {URI}
         curl -X POST -d '{"1" : 0 , "2" : 0, "3" : 0, "4" : 0 , "5" : 0 }' http://192.168.111.90:8000\?angle
@@ -80,7 +82,7 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
         uri = self.path
         uri_arg = urlparse.parse_qs(urlparse.urlparse(uri).query, keep_blank_values=True)
 
-        body = self.rfile.read(int(self.headers["Content-Length"])).decode('UTF-8')
+        body = self.rfile.read(int(self.headers["Content-Length"])).decode('utf-8')
         try:
             data = json.loads(body)
             self.send_response(200)
@@ -97,6 +99,10 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
                     if not __debug__:
                         print("motor_power : ", data["motor_power"])
                     set_motor_power(data["motor_power"])
+                    body = json.dumps({
+                            "motor_power" : data["motor_power"]
+                            })
+                    self.wfile.write(body.encode('utf-8'))
             else:
                 if not __debug__:
                     print(data.keys())
@@ -107,14 +113,24 @@ class JsonResponsehandler(BaseHTTPRequestHandler):
                         print("motor_power : ", data["motor_power"])
                 if "motor" in data.keys():
                     set_motor_speed(data["motor"]["l"], data["motor"]["r"])
+                    body = json.dumps({
+                            "motor_r" : data["motor"]["r"],
+                            "motor_l" : data["motor"]["l"]
+                            })
+                    self.wfile.write(body.encode('utf-8'))
                 if "motor_power" in data.keys():
                     set_motor_power(data["motor_power"])
+                    body = json.dumps({
+                            "motor_power" : data["motor_power"]
+                            })
+                    self.wfile.write(body.encode('utf-8'))
         except Exception as e:
             print(e)
 
 def main():
-    parser = argparse.ArgumentParser(description="usage:set JSON responce server port as '--port 5000' or '-p 5000'")
-    parser.add_argument("-p", "--port", type=int, default=5000, help="define raspimouse controller's tcp port")
+    parser = argparse.ArgumentParser(description="usage:set JSON responce server port e.g.) '--port 5000' or '-p 5000'")
+    parser.add_argument("-p", "--port", type=int, default=5000, help="define raspimouse controller's TCP port")
+    parser.add_argument("--version", action="version", version="raspimouse_http_controller sensor_server v" + VERSION)
     args = parser.parse_args()
 
     httpd = HTTPServer(("", args.port), JsonResponsehandler)
