@@ -7,7 +7,7 @@ HTTP server scripts for `Tiryoh/raspimouse_jupyternotebook <https://github.com/T
 Usage
 =====
 
-You just need is to run ``sensor_server.py`` or ``controller_server.py`` on your `Raspberry Pi Mouse <http://products.rt-net.jp/micromouse/raspberry-pi-mouse>`_.
+You just need to run ``sensor_server.py`` or ``controller_server.py`` on your `Raspberry Pi Mouse <http://products.rt-net.jp/micromouse/raspberry-pi-mouse>`_.
 
 e.g.)
 
